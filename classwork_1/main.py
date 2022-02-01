@@ -20,11 +20,11 @@ def convert_metric(unit_value, unit_to_convert_to):
         Additionally the function should ask the user in what unit type they want to return their output.
 """
 def convert_metric_input():
-    unit_input = input("Which unit are you using?")
-    unit_value = int(input("How many of that unit?"))
-    unit_to_convert_to = input("Which unit do you want to convert to?")
+    unit_input = input("Which units are you using?")
+    unit_value = int(input("How many of those units?"))
+    unit_to_convert_to = input("Which units do you want to convert to?")
 
-    conversion_rates = { # x_to_y_conversion
+    conversion_rates = { # input_to_output_conversion
         "feetmeters": 1/3.281,
         "feetmiles": 1/5280,
         "feetkilometers": 1/3281,
@@ -38,20 +38,21 @@ def convert_metric_input():
         "kilometersmeters": 1000,
         "kilometersmiles": 1/1.61,
     }
-
+    # value * conversion rate of input to output
     return unit_value * conversion_rates[unit_input + unit_to_convert_to]
 
 """
     C: Create a function that is similar to A except this time it is for Fahrenheit, Celcius and Kelvin. The function should offer all three temperature measures given the temperature and the unit type.
 """
 def convert_temp(unit_type, unit_value):
-    conversion_rates = {
+    conversion_rates = { # [Fahrenheit, Celcius, Kelvin]
         "Fahrenheit": [unit_value, (unit_value - 32) * 5/9 ,(unit_value - 32) * 5/9 + 273.15],
         "Celcius": [(unit_value * 9/5) + 32, unit_value, unit_value + 273.15],
         "Kelvin": [(unit_value - 273.15) * 9/5 + 32,unit_value - 273.15, unit_value],
     }
-    # Fahrenheit, Celcius, Kelvin
-    return [conversion_rates[unit_type][0], conversion_rates[unit_type][1], conversion_rates[unit_type][2]]
+
+    return [conversion_rates[unit_type]]
+
 """
 Q2:
 
@@ -109,6 +110,8 @@ if __name__ == "__main__":
     #print(convert_metric(20, 'k'))
     #print(convert_metric(32.2, "m"))
     #print(convert_metric_input())
-    print(convert_temp("Fahrenheit", 32))
+    #print(convert_temp("Fahrenheit", 32))
+
+    #
 
 
