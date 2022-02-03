@@ -199,14 +199,14 @@ def q3b(pace):
 """
 
 if __name__ == "__main__":
-    # print(convert_metric(20, 'k'))
-    # print(convert_metric(32.2, "m"))
-    # print(convert_metric_input())
-    # print(convert_temp("Fahrenheit", 32))
+    print(convert_metric(20, 'k'))
+    print(convert_metric(32.2, "m"))
+    print(convert_metric_input())
+    print(convert_temp("Fahrenheit", 32))
 
-    # print(convert_time(3600*24))
-    # print(calculate_speed("m", 1, 3600))
-    # print(calculate_distance(3600, 1))
+    print(convert_time(3600*24))
+    print(calculate_speed("m", 1, 3600))
+    print(calculate_distance(3600, 1))
 
-    # print(q3a(7))
+    print(q3a(7))
     print(q3b(10))
