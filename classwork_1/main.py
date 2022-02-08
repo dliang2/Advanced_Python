@@ -71,10 +71,11 @@ Q2:
 
 
 def convert_time(seconds):
-    minutes = seconds / 60
-    hours = minutes / 60
-    days = hours / 24
-    return [seconds, minutes, hours, days]
+    days = divmod(seconds, 60 * 60 * 24)
+    hours = divmod(days[1], 60 * 60)
+    minutes = divmod(hours[1], 60)
+
+    return [days[0], hours[0], minutes[0], minutes[1]]
 
 
 """
