@@ -1,6 +1,6 @@
 def generate_Kaprekar(end):
     # iterate
-    for i in range(end + 1):
+    for i in range(end - 1):
         # get the square
         sqr = i ** 2
         digits = str(sqr) 
