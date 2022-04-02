@@ -142,6 +142,33 @@ class AdjacencyList:
         print(max(edge_dictionary, key=edge_dictionary.get))
         return max(edge_dictionary, key=edge_dictionary.get)
 
+    def BFS(self, start=0):
+        node = start
+        visited = []
+        for i in range(len(self.adjacency_list)):
+            visited.append(False)
+
+        queue = [node]
+        visited[node] = True
+
+        while queue:
+            node = queue.pop(0)
+            print(node)
+
+            for value in self.adjacency_list[node]:
+                if not visited[value]:
+                    queue.append(value)
+                    visited[value] = True
+
+    def DFS(self, start, visited):
+        node = start
+        visited[node] = True
+        print(node)
+
+        for value in self.adjacency_list[node]:
+            if value not in visited:
+                self.DFS(value, visited)
+
 class AdjacencyMatrix:
     def __init__(self, size, is_directed = False):
         self.adjacency_matrix = []
@@ -167,7 +194,6 @@ class AdjacencyMatrix:
         pprint(self.adjacency_matrix)
 
     def add_edge_pair(self, node, value, direction = "<>"):
-
         if self.is_directed:
             if direction == "->":
                 self.adjacency_matrix[node][value] = 1
@@ -218,6 +244,32 @@ class AdjacencyMatrix:
         print(max(self.edge_pointing, key=self.edge_pointing.get))
         return max(self.edge_pointing, key=self.edge_pointing.get)
 
+    def BFS(self, start=0):
+        node = start
+        visited = []
+        for i in range(self.size):
+            visited.append(False)
+
+        queue = [node]
+        visited[node] = True
+
+        while queue:
+            node = queue.pop(0)
+            print(node)
+
+            for i in range(self.size):
+                if self.adjacency_matrix[node][i] == 1 and visited[i] == False:
+                    visited[i] = True
+                    queue.append(i)
+
+    def DFS(self, start, visited):
+        node = start
+        visited[node] = True
+        print(node)
+        for i in range(self.size):
+            if self.adjacency_matrix[node][i] == 1 and i not in visited:
+                self.DFS(i, visited)
+
 
 if __name__ == "__main__":
     # make_list_case = make_adjacency_list((1, 2), (1, 3), (2, 1), (2, 4), (3, 1), (3, 4), (4, 2), (4, 3), (4, 5), (5, 4))
@@ -226,9 +278,9 @@ if __name__ == "__main__":
     # count_test_2 = count_nodes((1, 2), (1, 3), (2, 1), (2, 4), (3, 1), (3, 4), (4, 2), (4, 3), (4, 5), (5, 4), (5, 6))
     # make_matrix_case = make_adjacency_matrix((1, 2), (1, 3), (2, 1), (2, 4), (3, 1), (3, 4), (4, 2), (4, 3), (4, 5), (5, 4), (5, 6))
 
-    # make_directional_list_case = make_directional_adjacency_list((1, 2, "->"), (1, 3, "<-"), (2, 3, "<>"), (2, 4, "<-"), (3, 1, "->"), (3, 4, "<>"))
-    # count_test = count_nodes((1, 2, "->"), (1, 3, "<-"), (2, 3, "<>"))
-    # make_directional_matrix_case = make_directional_adjacency_matrix((1, 2, "->"), (1, 3, "<-"), (2, 3, "<>"), (2, 4, "<-"), (3, 1, "->"), (3, 4, "<>"))
+    make_directional_list_case = make_directional_adjacency_list((1, 2, "->"), (1, 3, "<-"), (2, 3, "<>"), (2, 4, "<-"), (3, 1, "->"), (3, 4, "<>"))
+    count_test = count_nodes((1, 2, "->"), (1, 3, "<-"), (2, 3, "<>"))
+    make_directional_matrix_case = make_directional_adjacency_matrix((1, 2, "->"), (1, 3, "<-"), (2, 3, "<>"), (2, 4, "<-"), (3, 1, "->"), (3, 4, "<>"))
 
     print("--------------------------")
 
@@ -242,10 +294,16 @@ if __name__ == "__main__":
     list.add_edge_pair(3, 1, "->")
     list.add_edge_pair(3, 4, "<>")
 
-    # list.print()
+    list.print()
     list.count_most_edges()
     list.count_most_edges_leaving()
     list.count_most_edges_pointing()
+
+    print("--------------------------")
+    list.BFS(2)
+    print("--------------------------")
+    list.DFS(2, {})
+    print("--------------------------")
 
     matrix = AdjacencyMatrix(5, True)
     matrix.add_edge_pair(1, 2, "->")
@@ -255,7 +313,12 @@ if __name__ == "__main__":
     matrix.add_edge_pair(3, 1, "->")
     matrix.add_edge_pair(3, 4, "<>")
 
-    # matrix.print()
+    matrix.print()
     matrix.count_most_edges()
     matrix.count_most_edges_leaving()
     matrix.count_most_edges_pointing()
+
+    print("--------------------------")
+    matrix.BFS(2)
+    print("--------------------------")
+    matrix.DFS(2, {})
